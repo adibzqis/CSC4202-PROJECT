@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List All Parcel</title>
+    <style>
+        h1 {
+            font-size: 30px;
+            color: #3F743F;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+        .tbl-header {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .tbl-content {
+            height: 300px;
+            overflow-x: auto;
+            margin-top: 0px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            width: 100px;
+            color: #3F743F;
+            text-transform: uppercase;
+        }
+        td {
+            padding: 15px;
+            width: 100px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 600;
+            font-size: 12px;
+            color: darkgreen;
+            border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #7DA57D, #FAE3D1);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .button {
+            background-color: #3F743F;
+            border: none;
+            color: white;
+            padding: 10px 17px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>List Parcel</h1>
+
+<!-- Optional: show welcome message -->
+<div th:if="${username != null}" style="text-align: center; color: #244724; font-weight: bold;">
+    <p th:text="'Welcome, ' + ${username}"></p>
+</div>
+
+<div class="tbl-header">
+    <table>
+        <thead>
+        <tr>
+            <th>Tracking Number</th>
+            <th>Weight</th>
+            <th>Order Date</th>
+            <th>Delivery Status</th>
+            <th>Payment Status</th>
+            <th>Receiver Name</th>
+            <th>Receiver Phone</th>
+            <th>Sender Phone</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="tbl-content">
+    <table>
+        <tbody>
+        <tr th:if="${parcels.empty}">
+            <td colspan="8">No Parcels Available</td>
+        </tr>
+        <tr th:each="parcel : ${parcels}">
+            <td><span th:text="${parcel.trackingNumber}"></span></td>
+            <td><span th:text="${parcel.weight}"></span></td>
+            <td><span th:text="${parcel.orderDate}"></span></td>
+            <td><span th:text="${parcel.deliveryStatus}"></span></td>
+            <td><span th:text="${parcel.paymentStatus}"></span></td>
+            <td><span th:text="${parcel.receiverName}"></span></td>
+            <td><span th:text="${parcel.receiverPhone}"></span></td>
+            <td><span th:text="${parcel.senderPhone}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ✅ Dynamic Main Menu button -->
+<a th:href="${homeLink}" class="button">Main Menu</a>
+
+</body>
+</html>

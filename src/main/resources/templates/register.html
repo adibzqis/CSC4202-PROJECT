@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Register Student</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f3f3f3;
+      padding: 40px;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 400px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .text-danger {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Student Registration</h2>
+
+<form th:action="@{/register}" th:object="${sender}" method="post">
+
+  <!-- ✅ CSRF token required by Spring Security -->
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+  <label>Name</label>
+  <input type="text" th:field="*{name}" required />
+
+  <label>Matric</label>
+  <input type="text" th:field="*{matric}" required />
+
+  <label>Phone</label>
+  <input type="text" th:field="*{phone}" required />
+
+  <button type="submit" class="btn">Register</button>
+
+  <!-- Optional: show error -->
+  <div th:if="${error}" class="text-danger" th:text="${error}"></div>
+</form>
+
+</body>
+</html>
